@@ -1,93 +1,295 @@
-/* —— basic reset —— */
+/* —— root colors and layout design —— */
+:root {
+  --loreal-red: #ff003b;
+  --loreal-gold: #e3a535;
+  --loreal-black: #1b1b1b;
+  --loreal-cream: #fffaf7;
+  --loreal-soft: #f8f1ea;
+  --loreal-warm: #f3e7d3;
+  --text-main: #2d2a2b;
+  --text-soft: #5e5656;
+  --white: #ffffff;
+  --shadow-soft: 0 18px 40px rgba(27, 27, 27, 0.08);
+  --shadow-strong: 0 24px 50px rgba(255, 0, 59, 0.15);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* —— body + fonts —— */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  color: var(--text-main);
+  background: linear-gradient(135deg, #fff8f8 0%, #fffdfb 28%, #fff3e3 100%);
   display: flex;
   justify-content: center;
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+select,
+input {
+  font: inherit;
 }
 
 .page-wrapper {
-  width: 90%;
-  max-width: 900px;
+  width: min(92%, 980px);
+  padding: 32px 28px 24px;
+  margin: 28px 0;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(227, 165, 53, 0.25);
+  border-radius: 28px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(8px);
 }
 
 /* header */
 .site-header {
   text-align: center;
-  padding-top: 50px;
-  padding-bottom: 10px;
+  padding: 18px 0 8px;
 }
 
 .logo {
-  width: 250px;
-  margin-bottom: 15px;
+  width: 220px;
+  margin: 0 auto 16px;
+  filter: drop-shadow(0 8px 18px rgba(27, 27, 27, 0.12));
 }
 
 .site-title {
-  font-size: 22px;
-  font-weight: 500;
+  font-size: clamp(1.7rem, 2vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--loreal-black);
   margin-bottom: 10px;
 }
 
 /* category filter */
 .search-section {
-  margin: 30px 0;
+  margin: 28px 0 18px;
   display: flex;
 }
 
 .search-section select {
   width: 100%;
-  padding: 16px;
-  font-size: 18px;
-  border: 2px solid #000;
-  border-radius: 8px;
+  padding: 16px 18px;
+  font-size: 1.05rem;
+  border: 1.5px solid rgba(27, 27, 27, 0.12);
+  border-radius: 16px;
   cursor: pointer;
-  background-color: white;
-  font-weight: 500;
+  background: linear-gradient(180deg, #ffffff 0%, #fffaf6 100%);
+  color: var(--text-main);
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(27, 27, 27, 0.04);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.search-section select:hover {
+  border-color: rgba(255, 0, 59, 0.45);
 }
 
 .search-section select:focus {
   outline: none;
-  border-color: #666;
+  border-color: var(--loreal-red);
+  box-shadow: 0 0 0 4px rgba(255, 0, 59, 0.12);
+}
+
+/* products grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 28px 0;
+}
+
+.product-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(255, 249, 245, 0.9)
+  );
+  border: 1px solid rgba(227, 165, 53, 0.25);
+  padding: 16px;
+  border-radius: 20px;
+  display: flex;
+  gap: 14px;
+  min-height: 170px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow: 0 10px 18px rgba(27, 27, 27, 0.04);
+}
+
+.product-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  background: linear-gradient(180deg, var(--loreal-red), var(--loreal-gold));
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 0, 59, 0.42);
+  box-shadow: var(--shadow-soft);
+}
+
+.product-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #fff, #fdf5ee);
+  border-radius: 14px;
+  padding: 8px;
+}
+
+.product-card .product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.product-card h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  color: var(--loreal-black);
+}
+
+.product-card p {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+
+/* selected products */
+.selected-products {
+  margin: 28px 0;
+  padding: 24px 22px 18px;
+  background: linear-gradient(135deg, var(--loreal-black) 0%, #2d1e1d 100%);
+  border: 1px solid rgba(227, 165, 53, 0.35);
+  border-radius: 22px;
+  color: var(--white);
+  box-shadow: var(--shadow-strong);
+}
+
+.selected-products h2 {
+  font-size: 1.35rem;
+  margin-bottom: 18px;
+  color: var(--white);
+}
+
+#selectedProductsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#selectedProductsList span {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(227, 165, 53, 0.4);
+  color: #fce7bf;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.generate-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px 18px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  background: linear-gradient(
+    135deg,
+    var(--loreal-red) 0%,
+    #d21d52 35%,
+    var(--loreal-gold) 100%
+  );
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+  box-shadow: 0 15px 25px rgba(255, 0, 59, 0.2);
+}
+
+.generate-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+.generate-btn:focus {
+  outline: 3px solid rgba(227, 165, 53, 0.45);
+  outline-offset: 3px;
+}
+
+.generate-btn i {
+  margin-right: 8px;
 }
 
 /* chat section */
 .chatbox {
-  margin: 40px 0;
-  border: 2px solid #000;
-  border-radius: 8px;
-  padding: 26px;
+  margin: 34px 0 0;
+  border: 1px solid rgba(27, 27, 27, 0.08);
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: 24px;
+  padding: 26px 22px 20px;
+  box-shadow: 0 12px 26px rgba(27, 27, 27, 0.04);
 }
 
 .chatbox h2 {
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 1.35rem;
+  margin-bottom: 18px;
+  color: var(--loreal-black);
 }
 
 .chat-window {
-  padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
-  height: 250px;
+  padding: 18px 16px;
+  font-size: 1rem;
+  line-height: 1.6;
+  height: 260px;
   overflow-y: auto;
-  background: #fafafa;
+  background: linear-gradient(180deg, #fffdfb 0%, var(--loreal-soft) 100%);
+  border: 1px solid rgba(227, 165, 53, 0.2);
+  border-radius: 18px;
   margin-bottom: 20px;
+  color: var(--text-main);
 }
 
 /* placeholder message */
 .placeholder-message {
   width: 100%;
   text-align: center;
-  padding: 40px;
-  color: #666;
-  font-size: 18px;
+  padding: 48px 20px;
+  color: var(--text-soft);
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 /* input row */
@@ -99,40 +301,80 @@ body {
 
 .chat-form input {
   flex: 1;
-  padding: 12px;
-  font-size: 18px;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  background: transparent;
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 1px solid rgba(27, 27, 27, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-main);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.chat-form input::placeholder {
+  color: #8a7e7d;
 }
 
 .chat-form input:focus {
   outline: none;
-  border-bottom-color: #000;
+  border-color: var(--loreal-red);
+  box-shadow: 0 0 0 4px rgba(255, 0, 59, 0.1);
 }
 
 .chat-form button {
-  font-size: 18px;
-  background: #000;
-  color: #fff;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, var(--loreal-red), var(--loreal-gold));
+  color: var(--white);
   border: none;
-  padding: 12px;
-  width: 48px;
-  height: 48px;
+  border-radius: 14px;
+  padding: 12px 16px;
+  min-width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 12px 22px rgba(255, 0, 59, 0.18);
 }
 
 .chat-form button:hover {
-  background: #666666;
+  transform: translateY(-1px);
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
+  outline: 3px solid rgba(227, 165, 53, 0.4);
   outline-offset: 2px;
+}
+
+/* footer */
+.site-footer {
+  margin: 36px 0 12px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.site-footer p {
+  font-weight: 600;
+}
+
+.site-footer nav {
+  margin-top: 12px;
+}
+
+.site-footer a {
+  margin: 0 8px;
+  color: var(--loreal-black);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-footer a:hover {
+  color: var(--loreal-red);
 }
 
 /* visually hidden */
@@ -148,108 +390,27 @@ body {
   border: 0;
 }
 
-/* footer */
-.site-footer {
-  margin: 60px 0 40px;
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-}
+/* responsive behavior */
+@media (max-width: 700px) {
+  .page-wrapper {
+    padding: 22px 18px 18px;
+  }
 
-.site-footer nav {
-  margin-top: 12px;
-}
+  .chat-form {
+    flex-direction: column;
+  }
 
-.site-footer a {
-  margin: 0 8px;
-  color: #000;
-  text-decoration: none;
-}
+  .chat-form button {
+    width: 100%;
+  }
 
-.site-footer a:hover {
-  color: #666666;
-}
+  .product-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
 
-/* products grid */
-.products-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 30px 0;
-}
-
-.product-card {
-  flex: 0 1 calc(33.333% - 14px);
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 4px;
-  display: flex;
-  gap: 15px;
-  min-height: 160px;
-}
-
-.product-card img {
-  width: 110px;
-  height: 110px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-.product-card .product-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 110px;
-}
-
-.product-card h3 {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.product-card p {
-  font-size: 14px;
-  color: #666;
-}
-
-/* selected products */
-.selected-products {
-  margin: 40px 0;
-  padding: 20px;
-  border: 2px solid #000;
-  border-radius: 8px;
-}
-
-.selected-products h2 {
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-#selectedProductsList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.generate-btn {
-  width: 100%;
-  margin-top: 20px;
-  padding: 16px;
-  font-size: 18px;
-  font-weight: 500;
-  color: #fff;
-  background: #000;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.generate-btn:hover {
-  background: #666;
-}
-
-.generate-btn i {
-  margin-right: 8px;
+  .product-card .product-info {
+    align-items: center;
+  }
 }
