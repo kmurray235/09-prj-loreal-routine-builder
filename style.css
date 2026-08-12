@@ -150,6 +150,11 @@ input {
   box-shadow: var(--shadow-soft);
 }
 
+.product-card.selected {
+  border-color: var(--loreal-red);
+  box-shadow: 0 0 0 3px rgba(255, 0, 59, 0.14);
+}
+
 .product-card img {
   width: 100px;
   height: 100px;
@@ -348,6 +353,32 @@ input {
 .chat-form button:focus {
   outline: 3px solid rgba(227, 165, 53, 0.4);
   outline-offset: 2px;
+}
+
+.chat-user,
+.chat-assistant {
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  max-width: 90%;
+  word-wrap: break-word;
+}
+
+.chat-user {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(27, 27, 27, 0.12);
+  align-self: flex-end;
+}
+
+.chat-assistant {
+  background: rgba(227, 165, 53, 0.14);
+  border: 1px solid rgba(227, 165, 53, 0.3);
+  align-self: flex-start;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
 }
 
 /* footer */
