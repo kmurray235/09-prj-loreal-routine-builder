@@ -11,7 +11,7 @@ const sendBtn = document.getElementById("sendBtn");
 /* Cloudflare Worker URL for the L'Oréal routine builder.
    Replace the placeholder below with the class worker URL from the README.
    Do not add an OpenAI API key to this browser code. */
-const WORKER_URL = "https://loreal-routine.your-subdomain.workers.dev/";
+const WORKER_URL = "https://wonderbot-worker.klm335.workers.dev";
 
 let allProducts = [];
 let currentDisplayProducts = [];
